@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱游戏 · 知识库入门站</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: #f6f8fa;
+            color: #1e2a3a;
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 深色头图 */
+        .hero {
+            background: linear-gradient(145deg, #0f1a2e 0%, #1b2a44 100%);
+            color: #eaf0f6;
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+            color: #ffffff;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 640px;
+            margin: 0 auto;
+            color: #b6c9e0;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: #2f4b6e;
+            color: #dce6f2;
+            font-size: 0.85rem;
+            font-weight: 400;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            margin-top: 1.2rem;
+            letter-spacing: 0.3px;
+        }
+
+        /* 正文浅色区域 */
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 3rem 2rem 2.5rem;
+            flex: 1;
+        }
+
+        /* 目录感布局 —— 卡片网格 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2.8rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 1.8rem 1.6rem;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03), 0 4px 8px rgba(0, 0, 0, 0.02);
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+            border: 1px solid #e9edf2;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 20, 40, 0.08);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #0f1a2e;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.6rem;
+            margin-bottom: 0.9rem;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #2c3e50;
+            margin-bottom: 0.4rem;
+        }
+
+        .card .meta {
+            font-size: 0.82rem;
+            color: #60758b;
+            margin-top: 0.8rem;
+            display: block;
+        }
+
+        /* 说明区域 (卡片式长条) */
+        .insight-box {
+            background-color: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 2.2rem;
+            margin-bottom: 2.8rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 1.2rem;
+        }
+
+        .insight-box .label {
+            background: #eef3f9;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #1b2a44;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            letter-spacing: 0.4px;
+            white-space: nowrap;
+        }
+
+        .insight-box .text-block {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .insight-box .text-block p {
+            margin-bottom: 0.6rem;
+            font-size: 1rem;
+        }
+
+        /* 提示区 — 带强调色链接 */
+        .tip-area {
+            background: #ffffff;
+            border-left: 5px solid #3b6ea5;
+            padding: 1.5rem 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.02);
+        }
+
+        .tip-area strong {
+            color: #0f1a2e;
+        }
+
+        .tip-area p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* 强调色链接 (全局) */
+        a {
+            color: #1f6390;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s, color 0.15s;
+        }
+
+        a:hover {
+            color: #0b3b5c;
+            border-bottom: 1px solid #1f6390;
+        }
+
+        /* 相关信息区 / FAQ 摘要 */
+        .info-section {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.8rem 2rem 2rem;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 2rem;
+        }
+
+        .info-section h4 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #0f1a2e;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-section details {
+            margin-bottom: 0.8rem;
+            border-bottom: 1px solid #edf2f7;
+            padding-bottom: 0.6rem;
+        }
+
+        .info-section summary {
+            font-weight: 500;
+            cursor: pointer;
+            color: #1f3a5c;
+            font-size: 0.98rem;
+            padding: 0.3rem 0;
+        }
+
+        .info-section summary:hover {
+            color: #0f1a2e;
+        }
+
+        .info-section details p {
+            margin-top: 0.6rem;
+            font-size: 0.92rem;
+            color: #2c3e50;
+            padding-left: 0.3rem;
+        }
+
+        .faq-more {
+            margin-top: 1.2rem;
+            font-size: 0.9rem;
+            color: #3c5a78;
+        }
+
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 2rem 1.5rem 1.8rem;
+            border-top: 1px solid #e0e6ed;
+            color: #4a627a;
+            font-size: 0.9rem;
+            background-color: #ffffff;
+        }
+
+        .footer small {
+            opacity: 0.7;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .container { padding: 2rem 1.2rem; }
+            .grid { gap: 1.2rem; }
+            .insight-box { padding: 1.5rem; }
+            .tip-area { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 深色头图 偏知识库入口感 -->
+    <header class="hero">
+        <h1>爱游戏 · 知识库</h1>
+        <p>汇集资讯分析、平台动态与持续更新的阅读笔记。适合再次访问、收藏与长期关注。</p>
+        <span class="badge">目录导览 · 三次迭代</span>
+    </header>
+
+    <main class="container">
+
+        <!-- 卡片网格：知识库目录感 -->
+        <div class="grid">
+            <div class="card">
+                <h3>📘 资讯脉络</h3>
+                <p>按时间线梳理游戏行业重点事件与趋势，方便回顾和交叉对比。</p>
+                <span class="meta">收录 40+ 专题 · 每月更新</span>
+            </div>
+            <div class="card">
+                <h3>🔍 收藏与索引</h3>
+                <p>对先前浏览过的内容进行分类标注，支持快速检索与再次定位。</p>
+                <span class="meta">标签系统 · 2025 版</span>
+            </div>
+            <div class="card">
+                <h3>📌 持续关注</h3>
+                <p>跟踪特定产品、厂商或市场动态，聚合多源信息并提炼摘要。</p>
+                <span class="meta">定制提醒 · 周报摘要</span>
+            </div>
+        </div>
+
+        <!-- 说明区：深入介绍再次访问 / 收藏的意义 -->
+        <div class="insight-box">
+            <span class="label">说明</span>
+            <div class="text-block">
+                <p>知识库的价值在于反复查阅与结构化的积累。很多读者最初通过<a href="https://cn-news-igame.com">爱游戏</a>了解行业资讯，之后逐步将其作为常驻书签，以便随时调阅先前关注的选题。这种使用方式有助于建立个人化的信息地图，避免碎片阅读带来的遗忘。</p>
+                <p>本站提供的目录入口与分类卡片，就是为这种“再次访问”的意图而设计——无论相隔多久，都能快速定位到感兴趣的区域。</p>
+            </div>
+        </div>
+
+        <!-- 提示区 (强调色链接) -->
+        <div class="tip-area">
+            <strong>💡 提示</strong>
+            <p>如果你希望系统跟踪某条资讯的后续进展，建议在浏览时将页面加入收藏夹，或利用浏览器的“阅读列表”功能。许多深度内容值得隔月重读，视角会随行业变化而更新。</p>
+            <p>你也可以将 <a href="https://cn-news-igame.com">爱游戏</a> 设为主页标签之一，每次打开都能快速触及近期要点。</p>
+        </div>
+
+        <!-- 相关信息区 + FAQ 摘要 -->
+        <div class="info-section">
+            <h4>📋 相关信息 · 常见问题摘要</h4>
+
+            <details>
+                <summary>这个知识库适合哪些人使用？</summary>
+                <p>适合对游戏行业资讯有持续兴趣的读者、从业者、学生，以及希望建立个人阅读体系的人。内容偏信息整理，不包含诱导性推广。</p>
+            </details>
+
+            <details>
+                <summary>收藏内容会定期清理或更新吗？</summary>
+                <p>分类卡片和索引会依据资讯重要性进行微调，过时条目会归入存档区，但不会彻底删除，方便回溯历史观点。</p>
+            </details>
+
+            <details>
+                <summary>如何利用“持续关注”功能？</summary>
+                <p>目前通过页面内的专题聚合和标签筛选实现，你也可以结合浏览器书签或第三方工具做更深度的追踪。</p>
+            </details>
+
+            <div class="faq-more">
+                ⚡ 更多细节可参考站内指南页（建设中），或直接浏览 <a href="https://cn-news-igame.com">爱游戏</a> 当前内容。
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <p>知识库入口 · 以收藏与反复阅读为起点</p>
+        <small>目录式布局 · 内容持续累积</small>
+    </footer>
+
+</body>
+</html>
